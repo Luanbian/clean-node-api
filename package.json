@@ -4,12 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch",
-    "test:staged": "jest"
+    "test": "jest --passWithNoTests --watch --silent --noStackTrace --runInBand",
+    "test:unit": "npm test -- --watch -c jest.unit.config.js",
+    "test:integration": "npm test -- --wath -c jest.integration.config.js",
+    "test:verbose": "jest --passWithNoTests",
+    "test:staged": "npm test -- --findRelatedTests",
+    "test:ci": "npm test -- --coverage"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "ISC", 
   "devDependencies": {
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.2",
