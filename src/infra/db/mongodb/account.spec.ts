@@ -1,11 +1,18 @@
+import { AccountMongoRepository } from './account'
 import { MongoHelper } from './helpers/mongo.helper'
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 describe('Account mongo repository', () => {
   beforeAll(async () => {
-    await MongoHelper.connect(process.env.MONGO_URL)
+    await MongoHelper.connect(process.env.MONGO_URL as string)
   })
   afterAll(async () => {
     await MongoHelper.disconnect()
+  })
+  beforeEach(async () => {
+    const accountCollection = MongoHelper.getCollection('accounts')
+    await accountCollection.deleteMany({})
   })
 
   test('Should return an account on success', async () => {
